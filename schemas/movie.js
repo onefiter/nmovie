@@ -38,12 +38,12 @@ MovieSchema.static = {
         return this
             .find({})
             .sort('meta.updateAt')
-        exec(cb)
+            .exec(cb)
     },
     findById: function(id, cb) {
         return this
             .findOne({ _id: id })
-        exec(cb)
+            .exec(cb)
     }
 }
 
