@@ -1,0 +1,26 @@
+{
+  "name": "nmovie",
+  "homepage": "https://github.com/onefiter/nmovie",
+  "authors": [
+    "onefiter <onefiter@gmail.com>"
+  ],
+  "description": "movie website",
+  "main": "app.js",
+  "keywords": [
+    "node.js",
+    "mongodb"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

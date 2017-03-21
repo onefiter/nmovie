@@ -1,0 +1,32 @@
+{
+  "name": "nmovie",
+  "version": "1.0.0",
+  "description": "node.js mongodb",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "jade": "^1.11.0",
+    "moment": "^2.17.1",
+    "mongoose": "^4.9.0",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onefiter/nmovie.git"
+  },
+  "keywords": [
+    "node.js",
+    "mongodb"
+  ],
+  "author": "onefiter",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/onefiter/nmovie/issues"
+  },
+  "homepage": "https://github.com/onefiter/nmovie#readme"
+}

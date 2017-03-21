@@ -16,7 +16,7 @@ app.set('views', './views/pages')
 
 //设置模板引擎
 app.set('view engine', 'jade')
-app.use(express.static(path.join(__dirname, 'bower_components')))
+app.use(express.static(path.join(__dirname, 'public')))
 app.listen(port)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -146,7 +146,7 @@ app.get('/admin/list', (req, res) => {
 })
 
 /**
- * delete
+ * delete 路由
  */
 app.delete('/admin/list', function(req, res) {
     var id = req.query.id;
