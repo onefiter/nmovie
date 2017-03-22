@@ -169,12 +169,65 @@ app.delete('/admin/list', function(req, res) {
 app.post('/user/signup', function(req, res) {
     var _user = req.body.user
     var user = new User(_user)
+    User.find({ name: _user.name }, function(err, user) {
+        if (err) {
+            console.log(error)
+        }
+        if (user) {
+            return res.redirect('/')
+        } else {
+            user.save(function(err, user) {
+                if (err) {
+                    console.log(err)
+                }
+                res.redirect('/admin/userlist');
+            })
+        }
+    })
 
-    user.save(function(err, res) {
+})
+
+//userlist page
+app.get('/admin/userlist', function(req, res) {
+    User.fetch(function(err, users) {
         if (err) {
             console.log(err)
         }
-        console.log(user)
-    })
+        console.log(users)
+        res.render('userlist', {
+            title: '用户列表页 ',
+            users: users
+        })
 
+    })
+})
+
+//signin
+
+app.post('/user/signin', function(req, res) {
+    var _user = req.body.user
+    var name = _user.name
+    var password = _user.password
+
+    User.findOne({ name: name }, function(err, user) {
+        if (err) {
+            console.log(err)
+        }
+
+        if (!user) {
+            return res.redirect('/')
+        }
+        user.comparePassword(password, function(err, isMatch) {
+            if (err) {
+                console.log(err)
+            }
+
+            if (isMatch) {
+                console.log('password is  matched')
+                return res.redirect('/')
+            } else {
+                console.log('password is not matched')
+            }
+        })
+    })
 })
