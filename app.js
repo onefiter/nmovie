@@ -1,17 +1,19 @@
 var express = require('express')
 var path = require('path')
 var mongoose = require('mongoose') //引入mongoose模块
+
 var _ = require('underscore')
 var bodyParser = require('body-parser')
 var session = require('express-session')
+var mongoStore = require('connect-mongo')(session)
 var Movie = require('./model/movie')
 var User = require('./model/user')
 var port = process.env.PORT || 3000
 
 //启动express服务
 var app = express()
-
-mongoose.connect('mongodb://localhost:27017/nmovie')
+var dbUrl = 'mongodb://localhost:27017/nmovie'
+mongoose.connect(dbUrl)
     //解决 mpromise (mongoose's default promise library) is deprecated,
     //plug in your own promise library instead: http://mongoosejs.com/docs/promises.html
 
@@ -27,6 +29,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({
     secret: 'nmovie',
+    store: new mongoStore({
+        url: dbUrl,
+        collection: 'sessions'
+    }),
     resave: false,
     saveUninitialized: true
 }))
@@ -40,7 +46,7 @@ console.log('movie started on port ' + port);
 //index page
 app.get('/', function(req, res) {
     console.log('user in session: ')
-    consl
+    console.log(req.session.user)
     Movie.fetch(function(err, movies) {
         if (err) {
             console.log(err)
