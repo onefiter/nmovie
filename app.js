@@ -40,7 +40,7 @@ console.log('movie started on port ' + port);
 //index page
 app.get('/', function(req, res) {
     console.log('user in session: ')
-    console.log(req.session.user)
+    consl
     Movie.fetch(function(err, movies) {
         if (err) {
             console.log(err)
