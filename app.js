@@ -3,6 +3,7 @@ var path = require('path')
 var mongoose = require('mongoose') //引入mongoose模块
 var _ = require('underscore')
 var bodyParser = require('body-parser')
+var session = require('express-session')
 var Movie = require('./model/movie')
 var User = require('./model/user')
 var port = process.env.PORT || 3000
@@ -14,7 +15,6 @@ mongoose.connect('mongodb://localhost:27017/nmovie')
     //解决 mpromise (mongoose's default promise library) is deprecated,
     //plug in your own promise library instead: http://mongoosejs.com/docs/promises.html
 
-
 //指定视图所在路径
 app.set('views', './views/pages')
 
@@ -24,6 +24,12 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.listen(port)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(session({
+    secret: 'nmovie',
+    resave: false,
+    saveUninitialized: true
+}))
 app.locals.moment = require('moment');
 console.log('movie started on port ' + port);
 
@@ -33,7 +39,8 @@ console.log('movie started on port ' + port);
 
 //index page
 app.get('/', function(req, res) {
-
+    console.log('user in session: ')
+    console.log(req.session.user)
     Movie.fetch(function(err, movies) {
         if (err) {
             console.log(err)
@@ -223,7 +230,8 @@ app.post('/user/signin', function(req, res) {
             }
 
             if (isMatch) {
-                console.log('password is  matched')
+                req.session.user = user
+
                 return res.redirect('/')
             } else {
                 console.log('password is not matched')
