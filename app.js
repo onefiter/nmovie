@@ -4,12 +4,16 @@ var mongoose = require('mongoose') //引入mongoose模块
 var _ = require('underscore')
 var bodyParser = require('body-parser')
 var Movie = require('./model/movie')
+var User = require('./model/user')
 var port = process.env.PORT || 3000
 
 //启动express服务
 var app = express()
 
 mongoose.connect('mongodb://localhost:27017/nmovie')
+    //解决 mpromise (mongoose's default promise library) is deprecated,
+    //plug in your own promise library instead: http://mongoosejs.com/docs/promises.html
+
 
 //指定视图所在路径
 app.set('views', './views/pages')
@@ -159,4 +163,18 @@ app.delete('/admin/list', function(req, res) {
             }
         })
     }
+})
+
+// signup
+app.post('/user/signup', function(req, res) {
+    var _user = req.body.user
+    var user = new User(_user)
+
+    user.save(function(err, res) {
+        if (err) {
+            console.log(err)
+        }
+        console.log(user)
+    })
+
 })
