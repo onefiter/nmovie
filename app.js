@@ -15,7 +15,7 @@ mongoose.connect(dbUrl)
     //plug in your own promise library instead: http://mongoosejs.com/docs/promises.html
 
 //指定视图所在路径
-app.set('views', './views/pages')
+app.set('views', './app/views/pages')
 
 //设置模板引擎
 app.set('view engine', 'jade')
