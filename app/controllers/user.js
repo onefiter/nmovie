@@ -55,7 +55,7 @@
    //logout
    exports.logout = function(req, res) {
        delete req.session.user
-       delete app.locals.user
+           //    delete app.locals.user
        res.redirect('/')
    }
 

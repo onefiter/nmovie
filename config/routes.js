@@ -11,12 +11,10 @@ module.exports = function(app) {
     //pre handle user
     app.use(function(req, res, next) {
         var _user = req.session.user
-        if (_user) {
-            app.locals.user = _user
 
-        }
-        return next()
+        app.locals.user = _user
 
+        next()
     })
 
 
@@ -30,7 +28,7 @@ module.exports = function(app) {
     app.post('/user/signin', User.signin)
 
     //logout
-    app.post('/user/logout', User.logout)
+    app.get('/logout', User.logout)
 
     //userlist page
     app.get('/admin/userlist', User.list)
