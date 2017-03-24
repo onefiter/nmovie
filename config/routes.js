@@ -18,33 +18,22 @@ module.exports = function(app) {
     })
 
 
-    //index page
+    // Index page 
     app.get('/', Index.index)
 
-    // signup
+    //User page
     app.post('/user/signup', User.signup)
-
-    // signin
     app.post('/user/signin', User.signin)
-
-    //logout
+    app.get('/signin', User.showSignin)
+    app.get('/signup', User.showSignup)
     app.get('/logout', User.logout)
-
-    //userlist page
     app.get('/admin/userlist', User.list)
 
-    //admin post movie
+    //Movie page
     app.post('/admin/movie/new', Movie.new)
-
-    //detail page
     app.get('/movie/:id', Movie.detail)
-
     app.get('/admin/update/:id', Movie.update)
-
-    //admin
     app.get('/admin/movie', Movie.save)
-
-    // list page
     app.get('/admin/list', Movie.list)
 
     /**
